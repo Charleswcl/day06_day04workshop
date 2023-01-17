@@ -15,7 +15,7 @@ public class Cookie {
 
     List<String> cookieItems = null;
 
-    public void readCookieFile() throws FileNotFoundException {
+    public void readCookieFile() throws IOException {
         cookieItems = new ArrayList<String>();
 
         File file = new File(dirPath + File.separator + fileName);
@@ -31,21 +31,25 @@ public class Cookie {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            br.close();
+            fr.close();
         }
-    }
+
+    };
 
     public String returnCookie() {
         Random rand = new Random();
 
-        if(cookieItems !=null) {
+        if (cookieItems != null) {
             return cookieItems.get(rand.nextInt(cookieItems.size()));
-        } else{
+        } else {
             return "There is no cookie found.";
         }
     }
 
     public void showCookies() {
-        if (cookieItems !=null){
+        if (cookieItems != null) {
             cookieItems.forEach(ci -> System.out.println(ci));
 
             // for(String)
